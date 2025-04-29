@@ -11,15 +11,16 @@ class IntResultTest extends TestCase
 {
     public function testSuccessfulStringResult(): void
     {
-        $result = new Result(123);
+        $result = Result::OK(123);
         $exception = null;
         try {
             Assert::assertEquals(123, $result->ensureValue());
         } catch (ResultException $e) {
             $exception = $e;
         }
-        Assert::assertEquals('', $result->getMessage());
+        Assert::assertEquals('', $result->getErrorMessage());
         Assert::assertTrue($result->wasSuccessful());
+        Assert::assertFalse($result->wasNotSuccessful());
         Assert::assertEquals(123, $result->getValue());
         Assert::assertNull($exception);
     }

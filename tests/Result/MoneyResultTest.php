@@ -12,7 +12,7 @@ class MoneyResultTest extends TestCase
 {
     public function testSuccessfulStringResult(): void
     {
-        $result = new Result(Money::of(100, 'EUR'));
+        $result = Result::OK(Money::of(100, 'EUR'));
         $exception = null;
         try {
             /** @var Money $ensured */
@@ -21,8 +21,9 @@ class MoneyResultTest extends TestCase
         } catch (ResultException $e) {
             $exception = $e;
         }
-        Assert::assertEquals('', $result->getMessage());
+        Assert::assertEquals('', $result->getErrorMessage());
         Assert::assertTrue($result->wasSuccessful());
+        Assert::assertFalse($result->wasNotSuccessful());
         /** @var Money $res */
         $res = $result->getValue();
         Assert::assertEquals(Money::of(100, 'EUR')->getAmount(), $res->getAmount());

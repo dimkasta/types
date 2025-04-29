@@ -11,33 +11,35 @@ class NullResultTest extends TestCase
 {
     public function testNonSuccessfulStringResultWithExceptions(): void
     {
-        $result = new Result(null, 'error');
+        $result = Result::ERROR('error');
         $exception = null;
         try {
             $val = $result->ensureValue();
         } catch (ResultException $e) {
             $exception = $e;
         }
-        Assert::assertEquals('error', $result->getMessage());
+        Assert::assertEquals('error', $result->getErrorMessage());
         Assert::assertFalse($result->wasSuccessful());
+        Assert::assertTrue($result->wasNotSuccessful());
         Assert::assertTrue($exception instanceof ResultException);
         Assert::assertEquals('error', $exception->getMessage());
     }
 
     public function testNonSuccessfulStringResultWithoutExceptions(): void
     {
-        $result = new Result(null, 'error');
+        $result = Result::ERROR('error');
         $exception = null;
         $val = null;
         try {
-            if($result->wasSuccessful()) {
+            if($result->wasSuccessful() && !$result->wasNotSuccessful()) {
                 $val = $result->getValue();
             }
         } catch (ResultException $e) {
             $exception = $e;
         }
-        Assert::assertEquals('error', $result->getMessage());
+        Assert::assertEquals('error', $result->getErrorMessage());
         Assert::assertFalse($result->wasSuccessful());
+        Assert::assertTrue($result->wasNotSuccessful());
         Assert::assertEquals(null, $exception);
         Assert::assertEquals(null, $val);
     }

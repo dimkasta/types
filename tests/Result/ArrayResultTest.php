@@ -11,7 +11,7 @@ class ArrayResultTest extends TestCase
 {
     public function testSuccessfulStringResult(): void
     {
-        $result = new Result(['123', '321']);
+        $result = Result::OK(['123', '321']);
         $exception = null;
         try {
             /** @var array<mixed, mixed> $res */
@@ -21,8 +21,9 @@ class ArrayResultTest extends TestCase
         } catch (ResultException $e) {
             $exception = $e;
         }
-        Assert::assertEquals('', $result->getMessage());
+        Assert::assertEquals('', $result->getErrorMessage());
         Assert::assertTrue($result->wasSuccessful());
+        Assert::assertFalse($result->wasNotSuccessful());
         /** @var array<mixed, mixed> $val */
         $val = $result->getValue();
         Assert::assertEquals('123', $val[0]);
@@ -32,7 +33,7 @@ class ArrayResultTest extends TestCase
 
     public function testSuccessfulEmptyArrayResult(): void
     {
-        $result = new Result([]);
+        $result = Result::OK([]);
         $exception = null;
         try {
             /** @var array<mixed, mixed> $res */
@@ -41,8 +42,9 @@ class ArrayResultTest extends TestCase
         } catch (ResultException $e) {
             $exception = $e;
         }
-        Assert::assertEquals('', $result->getMessage());
+        Assert::assertEquals('', $result->getErrorMessage());
         Assert::assertTrue($result->wasSuccessful());
+        Assert::assertFalse($result->wasNotSuccessful());
         /** @var array<mixed, mixed> $val */
         $val = $result->getValue();
         Assert::assertEquals(0, count($val));

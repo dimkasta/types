@@ -11,15 +11,16 @@ class BooleanResultTest extends TestCase
 {
     public function testSuccessfulStringResult(): void
     {
-        $result = new Result(true);
+        $result = Result::OK(true);
         $exception = null;
         try {
             Assert::assertTrue($result->ensureValue());
         } catch (ResultException $e) {
             $exception = $e;
         }
-        Assert::assertEquals('', $result->getMessage());
+        Assert::assertEquals('', $result->getErrorMessage());
         Assert::assertTrue($result->wasSuccessful());
+        Assert::assertFalse($result->wasNotSuccessful());
         Assert::assertTrue($result->getValue());
         Assert::assertNull($exception);
     }

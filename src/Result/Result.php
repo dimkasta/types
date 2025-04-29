@@ -15,17 +15,17 @@ readonly class Result
      * @var string|int|OAuthToken|Money|bool|array<mixed,mixed>|null
      */
     private null|string|int|OAuthToken|Money|bool|array $value;
-    private string $message;
+    private string $errorMessage;
 
     /**
      * @param string|int|OAuthToken|Money|bool|array<mixed,mixed>|null $value
-     * @param string $message
+     * @param string $errorMessage
      */
-    public function __construct(
+    private function __construct(
         null|string|int|OAuthToken|Money|bool|array $value,
-        string $message = '',
+        string                                      $errorMessage = '',
     ) {
-        $this->message = $message;
+        $this->errorMessage = $errorMessage;
         $this->value = $value;
         if ( !is_null($value)) {
             $this->nonNullValue = $value;
@@ -34,9 +34,9 @@ readonly class Result
         }
     }
 
-    public function getMessage(): string
+    public function getErrorMessage(): string
     {
-        return $this->message;
+        return $this->errorMessage;
     }
 
     /**
@@ -46,7 +46,7 @@ readonly class Result
     public function ensureValue(): string|int|OAuthToken|Money|bool|array
     {
         if (!$this->wasSuccessful()) {
-            throw new ResultException($this->message);
+            throw new ResultException($this->errorMessage);
         }
 
         return $this->nonNullValue;
@@ -63,5 +63,24 @@ readonly class Result
     public function wasSuccessful(): bool
     {
         return null !== $this->value;
+    }
+
+    public function wasNotSuccessful(): bool
+    {
+        return null === $this->value;
+    }
+
+    /**
+     * @param string|int|OAuthToken|Money|bool|array<mixed,mixed> $value
+     * @return Result
+     */
+    public static function OK(string|int|OAuthToken|Money|bool|array $value): Result
+    {
+        return new self($value);
+    }
+
+    public static function ERROR(string $errorMessage): Result
+    {
+        return new self(null, $errorMessage);
     }
 }

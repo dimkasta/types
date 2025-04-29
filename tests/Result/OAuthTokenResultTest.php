@@ -13,7 +13,7 @@ class OAuthTokenResultTest extends TestCase
 {
     public function testSuccessfulStringResult(): void
     {
-        $result = new Result(new OAuthToken('123', Carbon::today()->addDay()));
+        $result = Result::OK(new OAuthToken('123', Carbon::today()->addDay()));
         $exception = null;
         try {
             /** @var OAuthToken $ensured */
@@ -22,8 +22,9 @@ class OAuthTokenResultTest extends TestCase
         } catch (ResultException $e) {
             $exception = $e;
         }
-        Assert::assertEquals('', $result->getMessage());
+        Assert::assertEquals('', $result->getErrorMessage());
         Assert::assertTrue($result->wasSuccessful());
+        Assert::assertFalse($result->wasNotSuccessful());
         /** @var OAuthToken $res */
         $res = $result->getValue();
         Assert::assertEquals('123', $res->getToken());
