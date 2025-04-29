@@ -27,6 +27,7 @@ class MoneyResultTest extends TestCase
         /** @var Money $res */
         $res = $result->getValue();
         Assert::assertEquals(Money::of(100, 'EUR')->getAmount(), $res->getAmount());
+        Assert::assertEquals(Money::of(100, 'EUR')->getAmount(), $result->getMoney()->getAmount());
         Assert::assertNull($exception);
     }
 }

@@ -28,6 +28,7 @@ class OAuthTokenResultTest extends TestCase
         /** @var OAuthToken $res */
         $res = $result->getValue();
         Assert::assertEquals('123', $res->getToken());
+        Assert::assertEquals('123', $result->getOAuthToken()->getToken());
         Assert::assertNull($exception);
     }
 }

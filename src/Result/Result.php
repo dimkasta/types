@@ -60,6 +60,45 @@ readonly class Result
         return $this->nonNullValue;
     }
 
+    public function getString(): string
+    {
+        /** @var string */
+        return $this->nonNullValue;
+    }
+
+    public function getInt(): int
+    {
+        /** @var int */
+        return $this->nonNullValue;
+    }
+
+    public function getBoolean(): bool
+    {
+        /** @var bool */
+        return $this->nonNullValue;
+    }
+
+    public function getMoney(): Money
+    {
+        /** @var Money */
+        return $this->nonNullValue;
+    }
+
+    /**
+     * @return array<mixed,mixed>
+     */
+    public function getArray(): array
+    {
+        /** @var array<mixed,mixed> */
+        return $this->nonNullValue;
+    }
+
+    public function getOAuthToken(): OAuthToken
+    {
+        /** @var OAuthToken */
+        return $this->nonNullValue;
+    }
+
     public function wasSuccessful(): bool
     {
         return null !== $this->value;

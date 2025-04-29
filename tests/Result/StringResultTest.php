@@ -22,6 +22,7 @@ class StringResultTest extends TestCase
         Assert::assertTrue($result->wasSuccessful());
         Assert::assertFalse($result->wasNotSuccessful());
         Assert::assertEquals('123', $result->getValue());
+        Assert::assertEquals('123', $result->getString());
         Assert::assertNull($exception);
     }
 }

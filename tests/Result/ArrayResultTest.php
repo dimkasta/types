@@ -28,6 +28,7 @@ class ArrayResultTest extends TestCase
         $val = $result->getValue();
         Assert::assertEquals('123', $val[0]);
         Assert::assertEquals('321', $val[1]);
+        Assert::assertEquals('123', $result->getArray()[0]);
         Assert::assertNull($exception);
     }
 

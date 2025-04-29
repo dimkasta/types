@@ -22,6 +22,7 @@ class BooleanResultTest extends TestCase
         Assert::assertTrue($result->wasSuccessful());
         Assert::assertFalse($result->wasNotSuccessful());
         Assert::assertTrue($result->getValue());
+        Assert::assertTrue($result->getBoolean());
         Assert::assertNull($exception);
     }
 }
