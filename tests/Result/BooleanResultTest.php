@@ -2,6 +2,8 @@
 
 namespace Iconic\Tests\Result;
 
+use Iconic\Assert\AssertError;
+use Iconic\Result\ResultErrorMessage;
 use Iconic\Result\ResultException;
 use Iconic\Result\Result;
 use PHPUnit\Framework\Assert;
@@ -24,5 +26,13 @@ class BooleanResultTest extends TestCase
         Assert::assertTrue($result->getValue());
         Assert::assertTrue($result->getBoolean());
         Assert::assertNull($exception);
+    }
+
+    public function testBoolAssertion(): void
+    {
+        $this::expectException(AssertError::class);
+        $this::expectExceptionMessage(ResultErrorMessage::BOOLEAN);
+        $result = Result::OK('test');
+        $result->getBoolean();
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0a72e585f79b127ce2fa55db36d438c",
+    "content-hash": "6225b9c7cb0abc4b957ac16cf5c670ca",
     "packages": [
         {
             "name": "brick/math",
@@ -191,6 +191,50 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "iconic/assert",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kastaniotis/assert.git",
+                "reference": "2807947f5838d20c7c4878a9fa13fc771cc17a6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kastaniotis/assert/zipball/2807947f5838d20c7c4878a9fa13fc771cc17a6e",
+                "reference": "2807947f5838d20c7c4878a9fa13fc771cc17a6e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^12.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Iconic\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dimitris Kastaniotis",
+                    "email": "d.kastaniotis@iconic.gr"
+                }
+            ],
+            "description": "Simple Assert Library",
+            "support": {
+                "issues": "https://github.com/kastaniotis/assert/issues",
+                "source": "https://github.com/kastaniotis/assert/tree/v1.0.0"
+            },
+            "time": "2025-05-01T12:01:43+00:00"
         },
         {
             "name": "nesbot/carbon",

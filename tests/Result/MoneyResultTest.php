@@ -3,6 +3,8 @@
 namespace Iconic\Tests\Result;
 
 use Brick\Money\Money;
+use Iconic\Assert\AssertError;
+use Iconic\Result\ResultErrorMessage;
 use Iconic\Result\ResultException;
 use Iconic\Result\Result;
 use PHPUnit\Framework\Assert;
@@ -29,5 +31,13 @@ class MoneyResultTest extends TestCase
         Assert::assertEquals(Money::of(100, 'EUR')->getAmount(), $res->getAmount());
         Assert::assertEquals(Money::of(100, 'EUR')->getAmount(), $result->getMoney()->getAmount());
         Assert::assertNull($exception);
+    }
+
+    public function testMoneyAssertion(): void
+    {
+        $this::expectException(AssertError::class);
+        $this::expectExceptionMessage(ResultErrorMessage::MONEY);
+        $result = Result::OK('test');
+        $result->getMoney();
     }
 }

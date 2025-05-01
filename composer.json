@@ -6,7 +6,8 @@
     "require": {
         "php": ">=8.2",
         "nesbot/carbon": "^3.9",
-        "brick/money": "^0.10.1"
+        "brick/money": "^0.10.1",
+        "iconic/assert": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^12.1",

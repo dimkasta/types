@@ -2,6 +2,8 @@
 
 namespace Iconic\Result;
 
-class ResultException extends \Exception
+use Exception;
+
+class ResultException extends Exception
 {
 }

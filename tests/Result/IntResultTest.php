@@ -2,6 +2,8 @@
 
 namespace Iconic\Tests\Result;
 
+use Iconic\Assert\AssertError;
+use Iconic\Result\ResultErrorMessage;
 use Iconic\Result\ResultException;
 use Iconic\Result\Result;
 use PHPUnit\Framework\Assert;
@@ -24,5 +26,13 @@ class IntResultTest extends TestCase
         Assert::assertEquals(123, $result->getValue());
         Assert::assertEquals(123, $result->getInt());
         Assert::assertNull($exception);
+    }
+
+    public function testIntAssertion(): void
+    {
+        $this::expectException(AssertError::class);
+        $this::expectExceptionMessage(ResultErrorMessage::INTEGER);
+        $result = Result::OK('test');
+        $result->getInt();
     }
 }

@@ -3,6 +3,8 @@
 namespace Iconic\Tests\Result;
 
 use Carbon\Carbon;
+use Iconic\Assert\AssertError;
+use Iconic\Result\ResultErrorMessage;
 use Iconic\Result\ResultException;
 use Iconic\Result\Result;
 use Iconic\Type\OAuthToken;
@@ -30,5 +32,13 @@ class OAuthTokenResultTest extends TestCase
         Assert::assertEquals('123', $res->getToken());
         Assert::assertEquals('123', $result->getOAuthToken()->getToken());
         Assert::assertNull($exception);
+    }
+
+    public function testOAuthTokenAssertion(): void
+    {
+        $this::expectException(AssertError::class);
+        $this::expectExceptionMessage(ResultErrorMessage::OAUTHTOKEN);
+        $result = Result::OK('test');
+        $result->getOAuthToken();
     }
 }

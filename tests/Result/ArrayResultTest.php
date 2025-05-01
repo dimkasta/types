@@ -2,7 +2,9 @@
 
 namespace Iconic\Tests\Result;
 
+use Iconic\Assert\AssertError;
 use Iconic\Result\Result;
+use Iconic\Result\ResultErrorMessage;
 use Iconic\Result\ResultException;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
@@ -50,5 +52,13 @@ class ArrayResultTest extends TestCase
         $val = $result->getValue();
         Assert::assertEquals(0, count($val));
         Assert::assertNull($exception);
+    }
+
+    public function testArrayAssertion(): void
+    {
+        $this::expectException(AssertError::class);
+        $this::expectExceptionMessage(ResultErrorMessage::ARRAY);
+        $result = Result::OK('test');
+        $result->getArray();
     }
 }
